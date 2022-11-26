@@ -8,6 +8,7 @@ import {
   FormButtonGroup,
   Submit,
   Space,
+  PreviewText,
 } from '@formily/next';
 import { createForm } from '@formily/core';
 import { FormProvider, createSchemaField } from '@formily/react';
@@ -21,6 +22,7 @@ const SchemaField = createSchemaField({
     Input,
     Select,
     ArrayItems,
+    PreviewText,
   },
 });
 
@@ -38,37 +40,58 @@ function ArrayItemsDemo() {
         >
           <SchemaField.Object>
             <SchemaField.Void x-component="Space">
-              <SchemaField.String
-                title=""
-                x-decorator="FormItem"
-                x-component="PreviewText.Input"
-                default="Hello world"
-              />
-              <SchemaField.String
-                name="date"
-                title="日期"
-                x-decorator="FormItem"
-                x-component="DatePicker.RangePicker"
-                required
-              />
-              <SchemaField.String
-                name="input"
-                title="输入框"
-                x-decorator="FormItem"
-                x-component="Input"
-                required
-              />
-              <SchemaField.String
-                name="select"
-                title="选择框"
-                x-decorator="FormItem"
-                x-component="Select"
-                enum={[
-                  { label: '选项1', value: 1 },
-                  { label: '选项2', value: 2 },
-                ]}
-                required
-              />
+              {
+                '<%- input %><%- select %>1213<%- DatePicker.RangePicker %>'.split(/(<%- .*? %>)/).map((item) => {
+                  switch (item) {
+                    case '<%- input %>':
+                      return (
+                        <SchemaField.String
+                          name="input"
+                          title=""
+                          x-decorator="FormItem"
+                          x-component="Input"
+                          required
+                        />
+                      );
+
+                    case '<%- select %>':
+                      return (
+                        <SchemaField.String
+                          name="select"
+                          title=""
+                          x-decorator="FormItem"
+                          x-component="Select"
+                          enum={[1, 2]}
+                          required
+                        />
+                      );
+
+                    case '<%- DatePicker.RangePicker %>':
+                      return (
+                        <SchemaField.String
+                          name="date"
+                          title=""
+                          x-decorator="FormItem"
+                          x-component="DatePicker.RangePicker"
+                          required
+                        />
+                      );
+
+                    default:
+                      return (
+                        <SchemaField.String
+                          title=""
+                          x-decorator="FormItem"
+                          x-component="PreviewText.Input"
+                          x-component-props={{
+                            style: { width: '100%' },
+                          }}
+                          default={item}
+                        />
+                      );
+                  }
+                })
+              }
               <SchemaField.Void
                 x-decorator="FormItem"
                 x-component="ArrayItems.Copy"
