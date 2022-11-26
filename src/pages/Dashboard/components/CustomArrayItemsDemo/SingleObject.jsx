@@ -31,7 +31,7 @@ function SingleObject(props) {
   });
   console.log('🚀~ 32 SingleObject rst', rst);
   return (
-    <SchemaField.Void x-component="Space">
+    <>
       <SchemaField.String
         name="aaa"
         title="日期"
@@ -69,7 +69,7 @@ function SingleObject(props) {
           }
         })
       }
-    </SchemaField.Void>
+    </>
   );
 }
 
