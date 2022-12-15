@@ -1,5 +1,5 @@
 name: ICE Front End Deployment
-on: push
+on:
   push:
     branches:
       - master
