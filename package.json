@@ -2,6 +2,7 @@
   "name": "@alifd/scaffold-lite-js",
   "version": "0.1.0",
   "description": "轻量级模板，使用 JavaScript，仅包含基础的 Layout。",
+  "homepage": "https://zangguojun.github.io/formily-learning",
   "dependencies": {
     "@alifd/next": "^1.26.8",
     "@alifd/theme-design-pro": "0.x",
